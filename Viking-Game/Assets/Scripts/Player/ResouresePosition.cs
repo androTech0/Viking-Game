@@ -42,16 +42,16 @@ public class ResouresePosition : MonoBehaviour
         {
             if (stopTime > 0)
             {
-                Debug.Log("Stay - "+ stopTime);
+                Debug.Log("Stay - "+ gameObject.name+ " : "+ stopTime);
                 animator.SetBool("forword", false);
-                animator.SetBool("Cut", true);
+                //animator.SetBool("Cut", true);
                 speed = 0f;
                 stopTime -= 2;
             }
             else
             {
 
-                animator.SetBool("Cut", false);
+                //animator.SetBool("Cut", false);
                 Destroy(CrystalRed[index].gameObject);
 
                 index += 1;
