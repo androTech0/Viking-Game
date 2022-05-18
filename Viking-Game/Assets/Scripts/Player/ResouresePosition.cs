@@ -7,16 +7,22 @@ public class ResouresePosition : MonoBehaviour
 {
 
     [SerializeField]
-    //Animator animator;
-    public Transform[] CrystalRed;
+    Transform[] CrystalRed;
+
+    [SerializeField]
+    GameObject toInstantiate;
+
+    public List<Transform> itemsToCollect = new List<Transform>();
+
+
+    Animator animator;
     int index = 0;
-    float speed = 2f;
-    int stopTime = 300;
+    float speed = 3f;
+    int stopTime = 100;
 
     void Start()
     {
-        transform.position = Vector3.MoveTowards(transform.position, CrystalRed[index].transform.position, 2f * Time.deltaTime);
-        //animator = GetComponent<Animator>();
+        animator = GetComponent<Animator>();
     }
 
     private void Update()
@@ -29,49 +35,55 @@ public class ResouresePosition : MonoBehaviour
         if (index <= CrystalRed.Length - 1)
         {
             transform.position = Vector3.MoveTowards(transform.position, CrystalRed[index].transform.position, speed * Time.deltaTime);
-            /*if (transform.position == CrystalRed[index].transform.position)
-            {
-                index += 1;
-            }*/
+            //animator.SetBool("Cut", true);
         }
+        /*
+        if (PlayerPrefs.GetInt("Done",0) == 1)
+        foreach (Transform t in CrystalRed)
+        {
+            t.gameObject.SetActive(true);
+        }
+        */
     }
-   
+
+
+
+
     private void OnCollisionStay(Collision collision)
     {
         if (collision.gameObject.tag == "Coll")
         {
             if (stopTime > 0)
             {
-                Debug.Log("Stay - "+ gameObject.name+ " : "+ stopTime);
-                //animator.SetBool("forword", false);
+                //Debug.Log("Stay - "+ gameObject.name+ " : "+ stopTime);
                 //animator.SetBool("Cut", true);
+                //animator.SetBool("forword", false);
                 speed = 0f;
                 stopTime -= 2;
             }
             else
             {
 
-                //animator.SetBool("Cut", false);
+                // animator.SetBool("Cut", false);
+                // animator.SetBool("forword", true);
+                //CrystalRed[index].gameObject.SetActive(false);
                 Destroy(CrystalRed[index].gameObject);
-
+                
+                itemsToCollect.Add(Instantiate(toInstantiate, CrystalRed[index].position, Quaternion.identity).transform);
+                Debug.Log("finished");
                 index += 1;
-                speed = 2f;
-                stopTime = 300;
-                //animator.SetBool("forword", true);
+                speed = 3f;
+                stopTime = 100;
             }
         }
     }
 
-    /*private void OnCollisionExit(Collision collision)
+    private void OnCollisionExit(Collision collision)
     {
         if (collision.gameObject.tag == "Coll")
         {
-            index += 1;
-            speed = 2f;
-            stopTime = 5;
+            Debug.Log("Exit");
+        }
 
         }
-    }
-    */
-
 }
