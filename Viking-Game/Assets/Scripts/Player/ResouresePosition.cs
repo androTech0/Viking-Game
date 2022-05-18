@@ -7,7 +7,7 @@ public class ResouresePosition : MonoBehaviour
 {
 
     [SerializeField]
-    Animator animator;
+    //Animator animator;
     public Transform[] CrystalRed;
     int index = 0;
     float speed = 2f;
@@ -16,7 +16,7 @@ public class ResouresePosition : MonoBehaviour
     void Start()
     {
         transform.position = Vector3.MoveTowards(transform.position, CrystalRed[index].transform.position, 2f * Time.deltaTime);
-        animator = GetComponent<Animator>();
+        //animator = GetComponent<Animator>();
     }
 
     private void Update()
@@ -43,7 +43,7 @@ public class ResouresePosition : MonoBehaviour
             if (stopTime > 0)
             {
                 Debug.Log("Stay - "+ gameObject.name+ " : "+ stopTime);
-                animator.SetBool("forword", false);
+                //animator.SetBool("forword", false);
                 //animator.SetBool("Cut", true);
                 speed = 0f;
                 stopTime -= 2;
@@ -57,7 +57,7 @@ public class ResouresePosition : MonoBehaviour
                 index += 1;
                 speed = 2f;
                 stopTime = 300;
-                animator.SetBool("forword", true);
+                //animator.SetBool("forword", true);
             }
         }
     }

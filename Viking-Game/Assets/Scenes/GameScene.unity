@@ -3961,7 +3961,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &634714466
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3974,7 +3974,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39a9c77e43d13724aa2cca2a5b6abd54, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 0}
   CrystalRed:
   - {fileID: 146472754}
   - {fileID: 113109127}
@@ -4573,7 +4572,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &728646675
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4586,7 +4585,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39a9c77e43d13724aa2cca2a5b6abd54, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 0}
   CrystalRed:
   - {fileID: 8569001119762684256}
   - {fileID: 5844344113385629165}
@@ -11439,7 +11437,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1589613536
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11452,7 +11450,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39a9c77e43d13724aa2cca2a5b6abd54, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 0}
   CrystalRed:
   - {fileID: 543450653218389932}
   - {fileID: 1466844569}
@@ -16107,7 +16104,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39a9c77e43d13724aa2cca2a5b6abd54, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 0}
   CrystalRed:
   - {fileID: 270420518}
   - {fileID: 1768322093}
@@ -22667,7 +22663,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39a9c77e43d13724aa2cca2a5b6abd54, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 0}
   CrystalRed:
   - {fileID: 1768322093}
   - {fileID: 568891856}
@@ -23709,7 +23704,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39a9c77e43d13724aa2cca2a5b6abd54, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 0}
   CrystalRed: []
 --- !u!1 &7215324379400740661
 GameObject:
