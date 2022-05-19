@@ -7,7 +7,7 @@ public class ResouresePosition : MonoBehaviour
 {
 
     [SerializeField]
-    Transform[] CrystalRed;
+    Transform[] rowResourses;
 
     [SerializeField]
     GameObject toInstantiate;
@@ -32,9 +32,9 @@ public class ResouresePosition : MonoBehaviour
 
     private void movePlayer()
     {
-        if (index <= CrystalRed.Length - 1)
+        if (index <= rowResourses.Length - 1)
         {
-            transform.position = Vector3.MoveTowards(transform.position, CrystalRed[index].transform.position, speed * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, rowResourses[index].transform.position, speed * Time.deltaTime);
             //animator.SetBool("Cut", true);
         }
         /*
@@ -51,7 +51,7 @@ public class ResouresePosition : MonoBehaviour
 
     private void OnCollisionStay(Collision collision)
     {
-        if (collision.gameObject.tag == "Coll")
+        if (collision.gameObject.tag == "RawResources")
         {
             if (stopTime > 0)
             {
@@ -67,20 +67,22 @@ public class ResouresePosition : MonoBehaviour
                 // animator.SetBool("Cut", false);
                 // animator.SetBool("forword", true);
                 //CrystalRed[index].gameObject.SetActive(false);
-                Destroy(CrystalRed[index].gameObject);
+                Destroy(rowResourses[index].gameObject);
                 
-                itemsToCollect.Add(Instantiate(toInstantiate, CrystalRed[index].position, Quaternion.identity).transform);
+                itemsToCollect.Add(Instantiate(toInstantiate, rowResourses[index].position, Quaternion.identity).transform);
                 Debug.Log("finished");
                 index += 1;
                 speed = 3f;
                 stopTime = 100;
             }
         }
+
+      
     }
 
     private void OnCollisionExit(Collision collision)
     {
-        if (collision.gameObject.tag == "Coll")
+        if (collision.gameObject.tag == "RowResources")
         {
             Debug.Log("Exit");
         }

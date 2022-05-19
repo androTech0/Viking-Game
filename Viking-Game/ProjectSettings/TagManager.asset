@@ -4,10 +4,10 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Coll
   - Repository
-  - col
   - cube
+  - RawResources
+  - Collectables
   layers:
   - Default
   - TransparentFX

@@ -8,7 +8,7 @@ public class MinerAnimation : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        animator = GetComponent<Animator>();
+       // animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -19,6 +19,7 @@ public class MinerAnimation : MonoBehaviour
 
     void OnCollisionStay(Collision collision)
     {
+        /*
         if (collision.gameObject.tag == "Coll")
         {
             animator.SetBool("Minning", true);
@@ -26,5 +27,6 @@ public class MinerAnimation : MonoBehaviour
         else {
             animator.SetBool("Minning", false);
         }
+        */
     }
 }

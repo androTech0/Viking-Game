@@ -10,9 +10,9 @@ public class Collect_Items : MonoBehaviour
     GameObject Miner;
     [SerializeField]
     GameObject Repository;
-
+    [SerializeField]
+    string nameOfResourses;
     public List<Transform> itemsToCollect;
-    Transform[] Crystal;
 
     Animator animator;
     float speed = 5f;
@@ -21,11 +21,11 @@ public class Collect_Items : MonoBehaviour
     bool pickedUp = false;
     bool go = true;
     bool back = false;
-
+    bool iss = true;
 
     void Update()
     {
-        itemsToCollect = Miner.GetComponent<ResouresePosition>().itemsToCollect;
+        
         collectItems();
 
     }
@@ -33,8 +33,10 @@ public class Collect_Items : MonoBehaviour
     private void collectItems()
     {
 
+            itemsToCollect = Miner.GetComponent<ResouresePosition>().itemsToCollect;
 
-        if (itemsToCollect.Count > 0 && itemsToCollect.Count <= 11 && !pickedUp)
+
+        if (itemsToCollect.Count > 0 && itemsToCollect.Count <= 12 && !pickedUp)
         {
             if (go) {
                 transform.position = Vector3.MoveTowards(transform.position, Path.position, speed * Time.deltaTime);
@@ -54,9 +56,6 @@ public class Collect_Items : MonoBehaviour
                 transform.position = Vector3.MoveTowards(transform.position, Path.position, speed * Time.deltaTime);
             }
         }
-
-        print(""+index);
-
     }
 
 
@@ -66,7 +65,7 @@ public class Collect_Items : MonoBehaviour
         if(collision.gameObject.tag == "Repository")
         {
             print("Repository");
-            PlayerPrefs.SetInt("RedCrystal", PlayerPrefs.GetInt("RedCrystal", 0) + 10);
+            PlayerPrefs.SetInt(nameOfResourses, PlayerPrefs.GetInt(nameOfResourses, 0) + 10);
             Destroy(itemsToCollect[index].gameObject);
             index += 1;
             pickedUp = false; 
@@ -75,7 +74,17 @@ public class Collect_Items : MonoBehaviour
 
         }
 
-        if(collision.gameObject.tag == "cube")
+        
+    }
+
+    private void OnTriggerEnter(Collider collision)
+    {
+        if (collision.gameObject.tag == "Collectables")
+        {
+            pickedUp = true;
+        }
+
+        if (collision.gameObject.tag == "cube")
         {
             if (!pickedUp)
             {
@@ -85,16 +94,7 @@ public class Collect_Items : MonoBehaviour
             {
                 back = true;
             }
-            
-        }
-    }
 
-    private void OnTriggerEnter(Collider collision)
-    {
-        if (collision.gameObject.tag == "col")
-        {
-            pickedUp = true;
-            print("trigger");
         }
     }
 }
