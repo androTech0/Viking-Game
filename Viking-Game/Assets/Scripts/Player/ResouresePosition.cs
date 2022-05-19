@@ -12,6 +12,9 @@ public class ResouresePosition : MonoBehaviour
     [SerializeField]
     GameObject toInstantiate;
 
+    [SerializeField]
+    Transform lastt;
+
     public List<Transform> itemsToCollect = new List<Transform>();
 
 
@@ -28,6 +31,10 @@ public class ResouresePosition : MonoBehaviour
     private void Update()
     {
         movePlayer();
+        if (true)
+        {
+
+        }
     }
 
     private void movePlayer()
@@ -37,13 +44,22 @@ public class ResouresePosition : MonoBehaviour
             transform.position = Vector3.MoveTowards(transform.position, rowResourses[index].transform.position, speed * Time.deltaTime);
             //animator.SetBool("Cut", true);
         }
-        /*
-        if (PlayerPrefs.GetInt("Done",0) == 1)
-        foreach (Transform t in CrystalRed)
+
+    }
+
+    public void reActiveAll()
+    {
+        foreach (Transform t in rowResourses)
         {
             t.gameObject.SetActive(true);
         }
-        */
+        
+        //gameObject.SetActive(false);
+       // gameObject.SetActive(true);
+        
+        //Destroy(gameObject);
+        //Instantiate(gameObject);
+        
     }
 
 
@@ -66,14 +82,26 @@ public class ResouresePosition : MonoBehaviour
 
                 // animator.SetBool("Cut", false);
                 // animator.SetBool("forword", true);
-                //CrystalRed[index].gameObject.SetActive(false);
-                Destroy(rowResourses[index].gameObject);
-                
+
+
                 itemsToCollect.Add(Instantiate(toInstantiate, rowResourses[index].position, Quaternion.identity).transform);
-                Debug.Log("finished");
+                rowResourses[index].gameObject.SetActive(false);
+
                 index += 1;
-                speed = 3f;
-                stopTime = 100;
+
+                if (index == rowResourses.Length)
+                {
+                    transform.position = lastt.transform.position;
+                    speed = 0f;
+                    
+                }
+                else
+                {
+                    speed = 3f;
+                    stopTime = 100;
+                }
+
+                
             }
         }
 
@@ -87,5 +115,5 @@ public class ResouresePosition : MonoBehaviour
             Debug.Log("Exit");
         }
 
-        }
+    }
 }

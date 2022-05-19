@@ -21,7 +21,7 @@ public class Collect_Items : MonoBehaviour
     bool pickedUp = false;
     bool go = true;
     bool back = false;
-    bool iss = true;
+   public bool finished = false;
 
     void Update()
     {
@@ -36,7 +36,7 @@ public class Collect_Items : MonoBehaviour
             itemsToCollect = Miner.GetComponent<ResouresePosition>().itemsToCollect;
 
 
-        if (itemsToCollect.Count > 0 && itemsToCollect.Count <= 12 && !pickedUp)
+        if (itemsToCollect.Count > 0 && index < itemsToCollect.Count && !pickedUp)
         {
             if (go) {
                 transform.position = Vector3.MoveTowards(transform.position, Path.position, speed * Time.deltaTime);
@@ -64,10 +64,24 @@ public class Collect_Items : MonoBehaviour
         
         if(collision.gameObject.tag == "Repository")
         {
+            
+
             print("Repository");
             PlayerPrefs.SetInt(nameOfResourses, PlayerPrefs.GetInt(nameOfResourses, 0) + 10);
             Destroy(itemsToCollect[index].gameObject);
-            index += 1;
+            if (index == itemsToCollect.Count-1)
+            {
+                Miner.GetComponent<ResouresePosition>().reActiveAll();
+                itemsToCollect.Clear();
+                Miner.GetComponent<ResouresePosition>().itemsToCollect.Clear();
+                //finished = true;
+                print("finished");
+            }
+            else
+            {
+                index += 1;
+            }
+
             pickedUp = false; 
             go = true;
             back = false;
