@@ -21,7 +21,6 @@ public class Collect_Items : MonoBehaviour
     bool pickedUp = false;
     bool go = true;
     bool back = false;
-   public bool finished = false;
 
     void Update()
     {
@@ -74,8 +73,7 @@ public class Collect_Items : MonoBehaviour
                 Miner.GetComponent<ResouresePosition>().reActiveAll();
                 itemsToCollect.Clear();
                 Miner.GetComponent<ResouresePosition>().itemsToCollect.Clear();
-                //finished = true;
-                print("finished");
+
             }
             else
             {

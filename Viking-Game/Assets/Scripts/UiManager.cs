@@ -14,22 +14,6 @@ public class UiManager : MonoBehaviour
     [SerializeField]
     public Transform[] RedArrays;
 
-    GameObject[] Guards;
-
-    GameObject gamobj;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     private void LateUpdate()
     {
         setValues();
@@ -52,10 +36,11 @@ public class UiManager : MonoBehaviour
     }
     public void instantiateCrystalRed()
     {
-        //minerCrystalRed.SetActive(true);
-        gamobj = Instantiate(minerCrystalRed, GameObject.Find("respawn").transform.position, minerCrystalRed.transform.rotation);
-        gamobj.transform.parent = GameObject.Find("ResoursesRed").transform;
-        gamobj.GetComponent<Transform>().localScale = new Vector3(0.05f, 0.05f, 0.05f); ;
+
+        minerCrystalRed.SetActive(true);
+        //gamobj = Instantiate(minerCrystalRed, GameObject.Find("respawn").transform.position, minerCrystalRed.transform.rotation);
+        //gamobj.transform.parent = GameObject.Find("ResoursesRed").transform;
+        //gamobj.GetComponent<Transform>().localScale = new Vector3(0.05f, 0.05f, 0.05f); ;
         hideMenu();
 
     }

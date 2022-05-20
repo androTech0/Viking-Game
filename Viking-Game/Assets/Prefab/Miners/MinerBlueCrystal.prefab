@@ -375,19 +375,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39a9c77e43d13724aa2cca2a5b6abd54, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rowResourses:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  rowResourses: []
   toInstantiate: {fileID: 8044098331270338090, guid: dca46b3d7f99215478a3ab3b881e2259, type: 3}
   lastt: {fileID: 1001030525401128910, guid: 8a7830bcd402caf4b8b149757903cddb, type: 3}
   itemsToCollect: []
