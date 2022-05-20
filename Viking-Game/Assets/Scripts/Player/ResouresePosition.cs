@@ -6,11 +6,14 @@ using UnityEngine;
 public class ResouresePosition : MonoBehaviour
 {
 
-    [SerializeField]
+    
     Transform[] rowResourses;
 
     [SerializeField]
     GameObject toInstantiate;
+
+    [SerializeField]
+    GameObject contnetObj;
 
     [SerializeField]
     Transform lastt;
@@ -26,23 +29,28 @@ public class ResouresePosition : MonoBehaviour
     void Start()
     {
         animator = GetComponent<Animator>();
+        rowResourses = contnetObj.GetComponent<UiManager>().RedArrays;
     }
 
+    [Obsolete]
     private void Update()
     {
         movePlayer();
-        if (true)
-        {
-
-        }
+        
     }
 
+    [Obsolete]
     private void movePlayer()
     {
-        if (index <= rowResourses.Length - 1)
+        if (index <= rowResourses.Length - 1 && rowResourses[index].gameObject.active)
         {
-            transform.position = Vector3.MoveTowards(transform.position, rowResourses[index].transform.position, speed * Time.deltaTime);
+            
+            transform.position = Vector3.MoveTowards(transform.position, rowResourses[index].transform.position , speed * Time.deltaTime);
             //animator.SetBool("Cut", true);
+
+        }
+        else if (index <= rowResourses.Length - 1 && rowResourses[index] == null) {
+            index += 1;
         }
 
     }
