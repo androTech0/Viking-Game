@@ -9,6 +9,8 @@ TagManager:
   - RawResources
   - Collectables
   - parking
+  - Enemy
+  - gaurd
   layers:
   - Default
   - TransparentFX
