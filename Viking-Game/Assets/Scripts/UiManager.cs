@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class UiManager : MonoBehaviour
 {
     [SerializeField]
-    GameObject[] Items;
+    public GameObject[] Items;
     float increase1, increase2 = 1;
     public List<GameObject> EnemeisArr, GaurdsArr = new List<GameObject>();
 
@@ -22,6 +22,7 @@ public class UiManager : MonoBehaviour
     6 - EnemiesMenuBtns,
     7 - enemy 1,
     8 - Gaurd
+    9 - Hosipital
 
 
 

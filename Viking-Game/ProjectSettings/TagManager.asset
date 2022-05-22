@@ -13,6 +13,7 @@ TagManager:
   - gaurd
   - gaurdSward
   - enemySward
+  - Medic
   layers:
   - Default
   - TransparentFX
