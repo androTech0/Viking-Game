@@ -11,6 +11,8 @@ TagManager:
   - parking
   - Enemy
   - gaurd
+  - gaurdSward
+  - enemySward
   layers:
   - Default
   - TransparentFX

@@ -852,9 +852,10 @@ GameObject:
   m_Component:
   - component: {fileID: 3695757352307618031}
   - component: {fileID: 294839746266282348}
+  - component: {fileID: 6739423512138577623}
   m_Layer: 0
   m_Name: Paladin_J_Nordstrom
-  m_TagString: Untagged
+  m_TagString: enemySward
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -995,6 +996,19 @@ SkinnedMeshRenderer:
     m_Center: {x: 0.79662716, y: 0.45543876, z: 0.2404747}
     m_Extent: {x: 0.15018606, y: 0.04597959, z: 0.507103}
   m_DirtyAABB: 0
+--- !u!65 &6739423512138577623
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2415088703279042821}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.30037224, y: 0.09195961, z: 1.014206}
+  m_Center: {x: 0.7962845, y: 1.4112256, z: 0.24547769}
 --- !u!1 &2581294051397623184
 GameObject:
   m_ObjectHideFlags: 0
@@ -1023,8 +1037,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2581294051397623184}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: -63.94, y: 0.51, z: 31.26}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -63.94, y: 0.41, z: 31.26}
+  m_LocalScale: {x: 0.7, y: 0.7, z: 0.7}
   m_Children:
   - {fileID: 7262365712643811262}
   - {fileID: 3695757352307618031}
@@ -1042,7 +1056,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2581294051397623184}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 9000000, guid: e22ba16a6824fb445a1a777d71e95894, type: 3}
   m_Controller: {fileID: 9100000, guid: 1a7b895116f49524e99db34a32ce8f8d, type: 2}
   m_CullingMode: 1
@@ -1082,7 +1096,7 @@ CapsuleCollider:
   m_Radius: 0.22
   m_Height: 2
   m_Direction: 1
-  m_Center: {x: 0, y: 0.91, z: 0}
+  m_Center: {x: 0, y: 0.97, z: 0}
 --- !u!114 &7076000863151679216
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1095,8 +1109,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2bf7a40b048399468d5d1c17314d206, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EnemeisArr: []
-  GaurdsArr: []
 --- !u!1 &3075058257197582561
 GameObject:
   m_ObjectHideFlags: 0

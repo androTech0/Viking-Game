@@ -5,14 +5,25 @@ using UnityEngine;
 public class EnemyMovment : MonoBehaviour
 {
 
-    public List<GameObject> EnemeisArr, GaurdsArr = new List<GameObject>();
-    float speed = 2f;
-    int stopTime = 300;
+    int health = 200;
+
+    Animator animator;
+    public List<GameObject>  GaurdsArr = new List<GameObject>();
+
+    private void Start()
+    {
+        animator = GetComponent<Animator>();
+    }
 
     void Update()
     {
-        
-        attack();
+        GaurdsArr = GameObject.Find("EventSystem").GetComponent<UiManager>().GaurdsArr;
+
+        if (health <= 0)
+        {
+           
+
+        }
     }
 
 
@@ -20,42 +31,36 @@ public class EnemyMovment : MonoBehaviour
     {
         if (collision.gameObject.tag == "gaurd")
         {
-            if (stopTime > 0)
+            //animator.SetBool("Walk", false);
+            //animator.SetBool("Hit1", true);
+            if (health <= 0)
             {
-                speed = 0f;
-                stopTime -= 2;
-            }
-            else
-            {
-                Destroy(GaurdsArr[0]);
-                GameObject.Find("EventSystem").GetComponent<UiManager>().GaurdsArr.RemoveAt(0);
-                stopTime = 300;
-                speed = 2f;
+               
+               // collision.gameObject.GetComponent<GaurdMovent>().gauedSpeed = 2f;
             }
         }
     }
 
-    private void attack()
+    private void OnTriggerEnter(Collider trigger)
     {
-
-        EnemeisArr = GameObject.Find("EventSystem").GetComponent<UiManager>().EnemeisArr;
-        GaurdsArr = GameObject.Find("EventSystem").GetComponent<UiManager>().GaurdsArr;
-
-        if (EnemeisArr.Count > 0 && GaurdsArr.Count > 0)
+        if (trigger.gameObject.tag == "gaurdSward")
         {
-            
-            if (GaurdsArr[0] == null)
+            health -=20;
+            if (health <= 0)
             {
-               // GameObject.Find("EventSystem").GetComponent<UiManager>().GaurdsArr.RemoveAt(0);
-               // GaurdsArr.RemoveAt(0);
-            }
-            else
-            {
-                transform.position = Vector3.MoveTowards(transform.position, GaurdsArr[0].transform.position, speed * Time.deltaTime);
+                GameObject.Find("EventSystem").GetComponent<UiManager>().EnemeisArr.RemoveAt(0);
+
+                GaurdsArr.ForEach(current =>
+                {
+                    current.gameObject.GetComponent<GaurdMovent>().gauedSpeed = 2f;
+
+                });
+                Destroy(gameObject);
+
             }
 
+            print(health);
         }
-
     }
-
+    
 }
