@@ -47,7 +47,7 @@ public class Collect_Items : MonoBehaviour
             if (back)
             {
                 transform.position = Vector3.MoveTowards(transform.position, Repository.transform.position, speed * Time.deltaTime);
-                itemsToCollect[index].transform.position = transform.position;
+                itemsToCollect[index].transform.position = Vector3.MoveTowards(itemsToCollect[index].transform.position, transform.position, speed * Time.deltaTime);
 
             }
             else
@@ -94,6 +94,7 @@ public class Collect_Items : MonoBehaviour
         if (collision.gameObject.tag == "Collectables")
         {
             pickedUp = true;
+
         }
 
         if (collision.gameObject.tag == "cube")

@@ -6,15 +6,14 @@ public class GaurdMovent : MonoBehaviour
 {
     public List<GameObject> EnemeisArr, GaurdsArr = new List<GameObject>();
     public float gauedSpeed = 2f;
-    int health = 200;
+    public float health = 100;
     Animator animator;
     bool isHealing = false;
     int targetPosi = 0;
-    int myPosi = 0;
+
     private void Start()
     {
         animator = GetComponent<Animator>();
-        myPosi = GameObject.Find("EventSystem").GetComponent<UiManager>().GaurdsArr.Count - 1 ;
     }
 
     void Update()
@@ -58,7 +57,6 @@ public class GaurdMovent : MonoBehaviour
                                 break;
                             }
                         }
-                        
                     }
                     if (isFound)
                     {
@@ -68,6 +66,7 @@ public class GaurdMovent : MonoBehaviour
                 }
             }
             
+
             isHealing = false;
             animator.SetBool("Hit1", false);
             animator.SetBool("Walk", true);
@@ -83,7 +82,7 @@ public class GaurdMovent : MonoBehaviour
         else if (EnemeisArr.Count == 0)
         {
             print("null");
-            if (health < 200 && !isHealing)
+            if (health < 100 && !isHealing)
             {
                 GameObject gmobj = GameObject.Find("EventSystem").GetComponent<UiManager>().Items[9];
                 animator.SetBool("Hit1", false);
@@ -103,7 +102,12 @@ public class GaurdMovent : MonoBehaviour
     {
         if (trigger.gameObject.tag == "enemySward")
         {
-            health -= 30;
+            health -= 200 * Time.deltaTime ;
+
+            if (health < 10)
+            {
+                animator.SetBool("Die", true);
+            }
             if (health <= 0)
             {
                 GameObject.Find("EventSystem").GetComponent<UiManager>().GaurdsArr.RemoveAt(0);
@@ -143,7 +147,7 @@ public class GaurdMovent : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.tag == "Medic") {
-            health = 200;
+            health = 100;
             isHealing = true;
         }   
     }

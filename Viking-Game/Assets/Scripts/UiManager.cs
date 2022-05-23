@@ -8,8 +8,14 @@ public class UiManager : MonoBehaviour
 {
     [SerializeField]
     public GameObject[] Items;
+
     float increase1, increase2 = 1;
+
     public List<GameObject> EnemeisArr, GaurdsArr = new List<GameObject>();
+
+    public List<Transform> RedResourses, BlueResourses, IronResourses, GoldResourses,toRespwn = new List<Transform>();
+
+
 
     /*
      * 
@@ -23,15 +29,13 @@ public class UiManager : MonoBehaviour
     7 - enemy 1,
     8 - Gaurd
     9 - Hosipital
-
+    10 - last 1
 
 
     */
     [SerializeField]
     Text t1,t2,t3, t4, t5;
 
-    //[SerializeField]
-    //public Transform[] RedArrays;
 
 
 
@@ -100,9 +104,9 @@ public class UiManager : MonoBehaviour
     public void instantiateCrystalRed()
     {
 
-        Items[0].SetActive(true);
-        //gamobj = Instantiate(minerCrystalRed, GameObject.Find("respawn").transform.position, minerCrystalRed.transform.rotation);
-        //gamobj.transform.parent = GameObject.Find("ResoursesRed").transform;
+        //Items[0].SetActive(true);
+        GameObject gamobj = Instantiate(Items[0], Items[10].transform.position, Items[0].transform.rotation);
+        gamobj.transform.parent = GameObject.Find("Miners").transform;
         //gamobj.GetComponent<Transform>().localScale = new Vector3(0.05f, 0.05f, 0.05f);
         hideMinersMenu();
 
@@ -143,6 +147,5 @@ public class UiManager : MonoBehaviour
         t5.text = "Trees = " + PlayerPrefs.GetInt("Trees", 0);
     }
 
-    
 
 }

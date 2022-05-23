@@ -6,16 +6,13 @@ public class EnemyMovment : MonoBehaviour
 {
     public List<GameObject> EnemeisArr, GaurdsArr = new List<GameObject>();
     public float enamySpeed = 2f;
-    int health = 300;
+    public float health = 100;
     Animator animator;
     int targetPosi = 0;
-    int myPosi = 0;
-
 
     private void Start()
     {
         animator = GetComponent<Animator>();
-        myPosi = GameObject.Find("EventSystem").GetComponent<UiManager>().EnemeisArr.Count - 1;
     }
 
     void Update()
@@ -33,10 +30,13 @@ public class EnemyMovment : MonoBehaviour
     private void attack() {
         EnemeisArr = GameObject.Find("EventSystem").GetComponent<UiManager>().EnemeisArr;
         GaurdsArr = GameObject.Find("EventSystem").GetComponent<UiManager>().GaurdsArr;
-           
+
+       // enamySpeed = 2f;
+
         if (enamySpeed > 0 && GaurdsArr.Count > 0)
         {
             
+
             if (GaurdsArr.Count == EnemeisArr.Count)
             {
                 targetPosi = GaurdsArr.Count - 1;
@@ -68,6 +68,12 @@ public class EnemyMovment : MonoBehaviour
 
                 }
             }
+            else if ( GaurdsArr.Count >= EnemeisArr.Count)
+            {
+                targetPosi = GaurdsArr.Count - 1;
+
+            }
+
             animator.SetBool("Hit1", false);
             animator.SetBool("Walk", true);
             transform.position = Vector3.MoveTowards(transform.position, GaurdsArr[targetPosi].transform.position, enamySpeed * Time.deltaTime);
@@ -77,9 +83,12 @@ public class EnemyMovment : MonoBehaviour
             transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(0, desRotation.eulerAngles.y, 0), 2000 * Time.deltaTime);
 
         }
-        else if (GaurdsArr[0] == null)
+        else if (GaurdsArr.Count == 0)
         {
-            
+            animator.SetBool("Hit1", false);
+            animator.SetBool("Walk", false);
+            enamySpeed = 0;
+
         }
 
 
@@ -92,16 +101,9 @@ public class EnemyMovment : MonoBehaviour
         {
             enamySpeed = 0;
 
-
             animator.SetBool("Walk", false);
             animator.SetBool("Hit1", true);
 
-        }
-        else
-        {
-            animator.SetBool("Walk", false);
-            animator.SetBool("Hit1", false);
-            enamySpeed = 2;
         }
     }
 
@@ -109,7 +111,7 @@ public class EnemyMovment : MonoBehaviour
     {
         if (trigger.gameObject.tag == "gaurdSward")
         {
-            health -=20;
+            health -= 140 *Time.deltaTime ;
             if (health <= 0)
             {
                 GameObject.Find("EventSystem").GetComponent<UiManager>().EnemeisArr.RemoveAt(0);
@@ -123,7 +125,7 @@ public class EnemyMovment : MonoBehaviour
 
             }
 
-            print(health);
+           // print(health);
         }
     }
     

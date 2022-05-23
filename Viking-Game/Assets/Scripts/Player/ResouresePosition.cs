@@ -6,14 +6,14 @@ using UnityEngine;
 public class ResouresePosition : MonoBehaviour
 {
 
-    [SerializeField]
-    Transform[] rowResourses;
-
+    //[SerializeField]
+    List<Transform> rowResourses = new List<Transform>();
+   // Transform[] rowResourses;
     [SerializeField]
     GameObject toInstantiate;
 
-   // [SerializeField]
-   // GameObject contnetObj;
+   //[SerializeField]
+   // GameObject EventSystem;
 
     [SerializeField]
     Transform lastt;
@@ -22,14 +22,13 @@ public class ResouresePosition : MonoBehaviour
 
 
     Animator animator;
-    int index = 0;
-    float speed = 3f;
+    //int index = 0;
+    public float speed = 3f;
     int stopTime = 100;
 
     void Start()
     {
         animator = GetComponent<Animator>();
-        //rowResourses = contnetObj.GetComponent<UiManager>().RedArrays;
     }
 
     [Obsolete]
@@ -42,16 +41,18 @@ public class ResouresePosition : MonoBehaviour
     [Obsolete]
     private void movePlayer()
     {
-        if (index <= rowResourses.Length - 1 )
+        rowResourses = GameObject.Find("EventSystem").GetComponent<UiManager>().RedResourses;
+
+        if (rowResourses.Count > 0 )
         {
             
-            transform.position = Vector3.MoveTowards(transform.position, rowResourses[index].transform.position , speed * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, rowResourses[0].transform.position , speed * Time.deltaTime);
             //animator.SetBool("Cut", true);
 
-        }
-        else if (index <= rowResourses.Length - 1 && rowResourses[index] == null) {
+        }/*
+        else if (index <= rowResourses.Count - 1 && rowResourses[index] == null) {
             index += 1;
-        }
+        }*/
 
     }
 
@@ -92,12 +93,11 @@ public class ResouresePosition : MonoBehaviour
                 // animator.SetBool("forword", true);
 
 
-                itemsToCollect.Add(Instantiate(toInstantiate, rowResourses[index].position, Quaternion.identity).transform);
-                rowResourses[index].gameObject.SetActive(false);
+                itemsToCollect.Add(Instantiate(toInstantiate, rowResourses[0].position, Quaternion.identity).transform);
+                rowResourses[0].gameObject.SetActive(false);
+                rowResourses.RemoveAt(0);
 
-                index += 1;
-
-                if (index == rowResourses.Length)
+                if ( rowResourses.Count  == 0)
                 {
                     transform.position = lastt.transform.position;
                     speed = 0f;
