@@ -9,7 +9,7 @@ public class EnemyMovment : MonoBehaviour
     public float health = 100;
     Animator animator;
     int targetPosi = 0;
-
+    int i = 0;
     private void Start()
     {
         animator = GetComponent<Animator>();
@@ -35,8 +35,7 @@ public class EnemyMovment : MonoBehaviour
 
         if (enamySpeed > 0 && GaurdsArr.Count > 0)
         {
-            
-
+           
             if (GaurdsArr.Count == EnemeisArr.Count)
             {
                 targetPosi = GaurdsArr.Count - 1;
@@ -74,7 +73,8 @@ public class EnemyMovment : MonoBehaviour
 
             }
 
-            animator.SetBool("Hit1", false);
+            animator.SetBool("swardAttack", false);
+            animator.SetBool("shieldAttack", false);
             animator.SetBool("Walk", true);
             transform.position = Vector3.MoveTowards(transform.position, GaurdsArr[targetPosi].transform.position, enamySpeed * Time.deltaTime);
 
@@ -85,8 +85,9 @@ public class EnemyMovment : MonoBehaviour
         }
         else if (GaurdsArr.Count == 0)
         {
-            animator.SetBool("Hit1", false);
+            animator.SetBool("swardAttack", false);
             animator.SetBool("Walk", false);
+            animator.SetBool("shieldAttack", false);
             enamySpeed = 0;
 
         }
@@ -100,18 +101,43 @@ public class EnemyMovment : MonoBehaviour
         if (collision.gameObject.tag == "gaurd")
         {
             enamySpeed = 0;
+            int ran = Random.Range(0, 2);
 
-            animator.SetBool("Walk", false);
-            animator.SetBool("Hit1", true);
-
+            if (ran == 0)
+            {
+                animator.SetBool("Walk", false);
+                animator.SetBool("shieldAttack", false);
+                animator.SetBool("swardAttack", true);
+            }
+            else if (ran == 1)
+            {
+                animator.SetBool("Walk", false);
+                animator.SetBool("swardAttack", false);
+                animator.SetBool("shieldAttack", true);
+            }
         }
     }
 
     private void OnTriggerEnter(Collider trigger)
     {
-        if (trigger.gameObject.tag == "gaurdSward")
+        if (trigger.gameObject.tag == "gaurdSward" || trigger.gameObject.tag == "gaurdShield")
         {
-            health -= 140 *Time.deltaTime ;
+            int damage = 0;
+            if (trigger.gameObject.tag == "gaurdSward")
+            {
+                damage = 140;
+            }
+            else if (trigger.gameObject.tag == "gaurdShield")
+            {
+                damage = 100;
+            }
+            health -= damage * Time.deltaTime ;
+
+            if (health < 15)
+            {
+                animator.SetBool("Die", true);
+            }
+
             if (health <= 0)
             {
                 GameObject.Find("EventSystem").GetComponent<UiManager>().EnemeisArr.RemoveAt(0);
@@ -124,8 +150,6 @@ public class EnemyMovment : MonoBehaviour
                 Destroy(gameObject);
 
             }
-
-           // print(health);
         }
     }
     

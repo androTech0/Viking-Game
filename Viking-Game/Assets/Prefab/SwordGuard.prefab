@@ -1152,7 +1152,7 @@ Animator:
   m_GameObject: {fileID: 4251049302329819632}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: e9cc607fadd649043a0b6312d0948cf7, type: 3}
-  m_Controller: {fileID: 9100000, guid: 1a7b895116f49524e99db34a32ce8f8d, type: 2}
+  m_Controller: {fileID: 9100000, guid: 682feea747e337043aeb580c8bfd9f97, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -2330,6 +2330,7 @@ GameObject:
   - component: {fileID: 7236789394234464877}
   - component: {fileID: 6974678883918363251}
   - component: {fileID: 3628050613359118126}
+  - component: {fileID: 4219395146456015849}
   m_Layer: 0
   m_Name: F_Shield_A_Red.001
   m_TagString: Untagged
@@ -2405,6 +2406,19 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &4219395146456015849
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7178395081059132361}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.7570344, y: 0.0762847, z: 0.7570346}
+  m_Center: {x: -0.0000009558669, y: 0.010509534, z: 0.00002411102}
 --- !u!1 &7539225305815898463
 GameObject:
   m_ObjectHideFlags: 0

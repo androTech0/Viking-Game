@@ -68,7 +68,8 @@ public class GaurdMovent : MonoBehaviour
             
 
             isHealing = false;
-            animator.SetBool("Hit1", false);
+            animator.SetBool("swardAttack", false);
+            animator.SetBool("shieldAttack", false);
             animator.SetBool("Walk", true);
             transform.position = Vector3.MoveTowards(transform.position, EnemeisArr[targetPosi].transform.position, gauedSpeed * Time.deltaTime);
 
@@ -81,12 +82,14 @@ public class GaurdMovent : MonoBehaviour
         }
         else if (EnemeisArr.Count == 0)
         {
-            print("null");
             if (health < 100 && !isHealing)
             {
-                GameObject gmobj = GameObject.Find("EventSystem").GetComponent<UiManager>().Items[9];
-                animator.SetBool("Hit1", false);
+                gauedSpeed = 2;
+                animator.SetBool("swardAttack", false);
+                animator.SetBool("shieldAttack", false);
                 animator.SetBool("Walk", true);
+
+                GameObject gmobj = GameObject.Find("EventSystem").GetComponent<UiManager>().Items[9];
                 transform.position = Vector3.MoveTowards(transform.position, gmobj.gameObject.transform.position, gauedSpeed * Time.deltaTime);
 
 
@@ -98,16 +101,63 @@ public class GaurdMovent : MonoBehaviour
         }
 
     }
+
+    private void OnCollisionStay(Collision collision)
+    {
+        if (collision.gameObject.tag == "Enemy")
+        {
+            gauedSpeed = 0;
+
+            isHealing = false;
+
+            int ran = Random.Range(0, 2);
+            print(ran);
+            if (ran == 0)
+            {
+                animator.SetBool("Walk", false);
+                animator.SetBool("shieldAttack", false);
+                animator.SetBool("swardAttack", true);
+            }
+            else if (ran == 1)
+            {
+                animator.SetBool("Walk", false);
+                animator.SetBool("swardAttack", false);
+                animator.SetBool("shieldAttack", true);
+            }
+
+        }/*
+        else
+        {
+            gauedSpeed = 2;
+            //animator.SetBool("Walk", false);
+            animator.SetBool("swardAttack", false);
+            animator.SetBool("shieldAttack", false);
+        }*/
+    }
+
+
     private void OnTriggerEnter(Collider trigger)
     {
-        if (trigger.gameObject.tag == "enemySward")
+        if (trigger.gameObject.tag == "enemySward" || trigger.gameObject.tag == "enemyShield")
         {
-            health -= 200 * Time.deltaTime ;
 
-            if (health < 10)
+            int damage = 0;
+            if (trigger.gameObject.tag == "enemySward")
+            {
+                damage = 180;
+            }
+            else if (trigger.gameObject.tag == "enemyShield")
+            {
+                damage = 140;
+            }
+
+            health -= damage * Time.deltaTime ;
+
+            if (health < 20)
             {
                 animator.SetBool("Die", true);
             }
+
             if (health <= 0)
             {
                 GameObject.Find("EventSystem").GetComponent<UiManager>().GaurdsArr.RemoveAt(0);
@@ -120,29 +170,9 @@ public class GaurdMovent : MonoBehaviour
                 Destroy(gameObject);
 
             }
-
-            print(health);
         }
     }
 
-    private void OnCollisionStay(Collision collision)
-    {
-        if (collision.gameObject.tag == "Enemy")
-        {
-            gauedSpeed = 0;
-
-            isHealing = false;
-            animator.SetBool("Walk", false);
-            animator.SetBool("Hit1", true);
-
-        }
-        else
-        {
-            animator.SetBool("Walk", false);
-            animator.SetBool("Hit1", false);
-            gauedSpeed = 2;
-        }
-    }
 
     private void OnCollisionEnter(Collision collision)
     {

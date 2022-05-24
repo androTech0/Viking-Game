@@ -6,14 +6,12 @@ using UnityEngine;
 public class ResouresePosition : MonoBehaviour
 {
 
-    //[SerializeField]
-    List<Transform> rowResourses = new List<Transform>();
-   // Transform[] rowResourses;
+    [SerializeField]
+    List<Transform> rowResourses;
+    int index = 0;
     [SerializeField]
     GameObject toInstantiate;
-
-   //[SerializeField]
-   // GameObject EventSystem;
+    Animator animator;
 
     [SerializeField]
     Transform lastt;
@@ -21,10 +19,9 @@ public class ResouresePosition : MonoBehaviour
     public List<Transform> itemsToCollect = new List<Transform>();
 
 
-    Animator animator;
-    //int index = 0;
     public float speed = 3f;
-    int stopTime = 100;
+    int stopTime = 200;
+    bool isMinning = false;
 
     void Start()
     {
@@ -41,18 +38,17 @@ public class ResouresePosition : MonoBehaviour
     [Obsolete]
     private void movePlayer()
     {
-        rowResourses = GameObject.Find("EventSystem").GetComponent<UiManager>().RedResourses;
 
         if (rowResourses.Count > 0 )
         {
             
-            transform.position = Vector3.MoveTowards(transform.position, rowResourses[0].transform.position , speed * Time.deltaTime);
-            //animator.SetBool("Cut", true);
+            transform.position = Vector3.MoveTowards(transform.position, rowResourses[index].transform.position , speed * Time.deltaTime);
+            if (!isMinning)
+            {
+                animator.SetBool("forword", true);
+            }
 
-        }/*
-        else if (index <= rowResourses.Count - 1 && rowResourses[index] == null) {
-            index += 1;
-        }*/
+        }
 
     }
 
@@ -78,38 +74,42 @@ public class ResouresePosition : MonoBehaviour
     {
         if (collision.gameObject.tag == "RawResources")
         {
+            
             if (stopTime > 0)
             {
-                //Debug.Log("Stay - "+ gameObject.name+ " : "+ stopTime);
-                //animator.SetBool("Cut", true);
-                //animator.SetBool("forword", false);
+                animator.SetBool("forword", false);
+                animator.SetBool("Minning", true);
+                isMinning = true;
                 speed = 0f;
                 stopTime -= 2;
             }
             else
             {
 
-                // animator.SetBool("Cut", false);
-                // animator.SetBool("forword", true);
+                 animator.SetBool("Minning", false);
+                 animator.SetBool("forword", true);
 
+                itemsToCollect.Add(Instantiate(toInstantiate, rowResourses[index].position, Quaternion.identity).transform);
+                rowResourses[index].gameObject.SetActive(false);
+                index += 1;
 
-                itemsToCollect.Add(Instantiate(toInstantiate, rowResourses[0].position, Quaternion.identity).transform);
-                rowResourses[0].gameObject.SetActive(false);
-                rowResourses.RemoveAt(0);
-
-                if ( rowResourses.Count  == 0)
+                if (index == rowResourses.Count)
                 {
                     transform.position = lastt.transform.position;
                     speed = 0f;
-                    
+                    animator.SetBool("Minning", false);
+                    animator.SetBool("forword", false);
                 }
                 else
                 {
                     speed = 3f;
                     stopTime = 100;
+                    animator.SetBool("Minning", false);
+                    animator.SetBool("forword", true);
                 }
 
-                
+                isMinning = false;
+
             }
         }
 

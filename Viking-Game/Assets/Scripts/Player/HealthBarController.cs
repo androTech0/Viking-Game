@@ -45,6 +45,7 @@ public class HealthBarController : MonoBehaviour
         {
             currentHealth = gaurd.health;
         }
+        if(m_Image != null)
         m_Image.fillAmount = currentHealth / maxHealth;
 
 
