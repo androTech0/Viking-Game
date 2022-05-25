@@ -8,6 +8,7 @@ public class GaurdMovent : MonoBehaviour
     public float gauedSpeed = 2f;
     public float health = 100;
     Animator animator;
+    CapsuleCollider collid;
     bool isHealing = false;
     int targetPosi = 0;
     float referech = 2f;
@@ -16,6 +17,7 @@ public class GaurdMovent : MonoBehaviour
     private void Start()
     {
         animator = GetComponent<Animator>();
+        collid = GetComponent<CapsuleCollider>();
     }
 
     [System.Obsolete]
@@ -106,6 +108,15 @@ public class GaurdMovent : MonoBehaviour
                 transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(0, desRotation.eulerAngles.y, 0), 2000 * Time.deltaTime);
 
             }
+            else
+            {
+                gauedSpeed = 2f;
+                animator.SetBool("swardAttack", false);
+                animator.SetBool("Walk", false);
+                animator.SetBool("shieldAttack", false);
+
+
+            }
         }
 
     }
@@ -156,7 +167,7 @@ public class GaurdMovent : MonoBehaviour
             if (health <= 0)
             {
                 animator.SetBool("Die", true);
-
+                //collid.isTrigger = true;
                 for (int x = 0; x < GameObject.Find("EventSystem").GetComponent<UiManager>().EnemeisArr.Count; x++)
                 {
                     GameObject.Find("EventSystem").GetComponent<UiManager>().EnemeisArr[x].GetComponent<EnemyMovment>().enamySpeed = 2f;

@@ -16,6 +16,7 @@ TagManager:
   - Medic
   - gaurdShield
   - enemyShield
+  - guardHammer
   layers:
   - Default
   - TransparentFX

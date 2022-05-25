@@ -24,10 +24,10 @@ public class UiManager : MonoBehaviour
     2 - minerIron,
     3 - minerGold,
     4 - treeCutter,
-    5 - MinersMenuBtns,
-    6 - EnemiesMenuBtns,
+    5 - --,
+    6 - Gaurd2,
     7 - enemy 1,
-    8 - Gaurd
+    8 - Gaurd1
     9 - repositry1
     10 - repositry2
     11 - revive1
@@ -66,6 +66,17 @@ public class UiManager : MonoBehaviour
     {
 
         GameObject gamobj = Instantiate(Items[8], new Vector3(Items[8].transform.position.x + increase2, Items[8].transform.position.y, Items[8].transform.position.z), Items[8].transform.rotation);
+        gamobj.transform.parent = GameObject.Find("Enemies").transform;
+        GaurdsArr.Add(gamobj);
+        //hideEnemiesMenu();
+        increase2 += 1.3f;
+
+    }
+
+    public void instantiateGuard2()
+    {
+
+        GameObject gamobj = Instantiate(Items[6], new Vector3(Items[6].transform.position.x + increase2, Items[6].transform.position.y, Items[6].transform.position.z), Items[6].transform.rotation);
         gamobj.transform.parent = GameObject.Find("Enemies").transform;
         GaurdsArr.Add(gamobj);
         //hideEnemiesMenu();

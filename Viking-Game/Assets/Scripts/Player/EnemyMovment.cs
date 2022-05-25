@@ -127,7 +127,7 @@ public class EnemyMovment : MonoBehaviour
 
     private void OnTriggerEnter(Collider trigger)
     {
-        if (trigger.gameObject.tag == "gaurdSward" || trigger.gameObject.tag == "gaurdShield")
+        if (trigger.gameObject.tag == "gaurdSward" || trigger.gameObject.tag == "gaurdShield" || trigger.gameObject.tag == "guardHammer")
         {
             int damage = 0;
             if (trigger.gameObject.tag == "gaurdSward")
@@ -137,6 +137,10 @@ public class EnemyMovment : MonoBehaviour
             else if (trigger.gameObject.tag == "gaurdShield")
             {
                 damage = 100;
+            }
+            else if (trigger.gameObject.tag == "guardHammer")
+            {
+                damage = 200;
             }
             health -= damage * Time.deltaTime ;
  
