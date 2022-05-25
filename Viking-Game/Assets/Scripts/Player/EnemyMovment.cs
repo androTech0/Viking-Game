@@ -35,8 +35,9 @@ public class EnemyMovment : MonoBehaviour
         EnemeisArr = GameObject.Find("EventSystem").GetComponent<UiManager>().EnemeisArr;
         GaurdsArr = GameObject.Find("EventSystem").GetComponent<UiManager>().GaurdsArr;
 
-
         
+
+
         if (enamySpeed > 0 && GaurdsArr.Count > 0)
         {
 
@@ -90,6 +91,7 @@ public class EnemyMovment : MonoBehaviour
         }
         else if (GaurdsArr.Count == 0)
         {
+            enamySpeed = 2f;
             animator.SetBool("swardAttack", false);
             animator.SetBool("Walk", false);
             animator.SetBool("shieldAttack", false);
