@@ -15,7 +15,7 @@ public class Collect_Items : MonoBehaviour
     public List<Transform> itemsToCollect;
 
     Animator animator;
-    float speed = 5f;
+    float speed = 20f;
     int index = 0;
 
     bool pickedUp = false;
@@ -68,17 +68,17 @@ public class Collect_Items : MonoBehaviour
             print("Repository");
             PlayerPrefs.SetInt(nameOfResourses, PlayerPrefs.GetInt(nameOfResourses, 0) + 10);
             Destroy(itemsToCollect[index].gameObject);
-            if (index == itemsToCollect.Count-1)
+            index += 1;
+            if (index == itemsToCollect.Count)
             {
-                Miner.GetComponent<ResouresePosition>().reActiveAll();
+                
                 itemsToCollect.Clear();
                 Miner.GetComponent<ResouresePosition>().itemsToCollect.Clear();
+                Miner.GetComponent<ResouresePosition>().reActiveAll();
+                index = 0;
 
             }
-            else
-            {
-                index += 1;
-            }
+           
 
             pickedUp = false; 
             go = true;

@@ -9,7 +9,7 @@ public class EnemyMovment : MonoBehaviour
     public float health = 100;
     Animator animator;
     int targetPosi = 0;
-    int i = 0;
+    float referech = 2f;
     private void Start()
     {
         animator = GetComponent<Animator>();
@@ -21,21 +21,26 @@ public class EnemyMovment : MonoBehaviour
         attack();
         if (health <= 0)
         {
+            referech -= Time.deltaTime;
+        }
+        if (referech <= 0.0)
+        {
             GameObject.Find("EventSystem").GetComponent<UiManager>().EnemeisArr.RemoveAt(0);
-
             Destroy(gameObject);
         }
+        
     }
 
     private void attack() {
         EnemeisArr = GameObject.Find("EventSystem").GetComponent<UiManager>().EnemeisArr;
         GaurdsArr = GameObject.Find("EventSystem").GetComponent<UiManager>().GaurdsArr;
 
-       // enamySpeed = 2f;
 
+        
         if (enamySpeed > 0 && GaurdsArr.Count > 0)
         {
-           
+
+            
             if (GaurdsArr.Count == EnemeisArr.Count)
             {
                 targetPosi = GaurdsArr.Count - 1;
@@ -88,7 +93,7 @@ public class EnemyMovment : MonoBehaviour
             animator.SetBool("swardAttack", false);
             animator.SetBool("Walk", false);
             animator.SetBool("shieldAttack", false);
-            enamySpeed = 0;
+            
 
         }
 
@@ -132,24 +137,20 @@ public class EnemyMovment : MonoBehaviour
                 damage = 100;
             }
             health -= damage * Time.deltaTime ;
-
-            if (health < 15)
-            {
-                animator.SetBool("Die", true);
-            }
-
+ 
             if (health <= 0)
             {
-                GameObject.Find("EventSystem").GetComponent<UiManager>().EnemeisArr.RemoveAt(0);
+                animator.SetBool("Die", true);
 
-                GaurdsArr.ForEach(current =>
+                for (int x = 0; x < GameObject.Find("EventSystem").GetComponent<UiManager>().GaurdsArr.Count; x++)
                 {
-                    current.gameObject.GetComponent<GaurdMovent>().gauedSpeed = 2f;
+                    GameObject.Find("EventSystem").GetComponent<UiManager>().GaurdsArr[x].GetComponent<GaurdMovent>().gauedSpeed = 2f;
 
-                });
-                Destroy(gameObject);
-
+                }
+                
             }
+
+            
         }
     }
     

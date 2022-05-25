@@ -6,8 +6,8 @@ using UnityEngine;
 public class ResouresePosition : MonoBehaviour
 {
 
-    [SerializeField]
-    List<Transform> rowResourses;
+    
+    public List<Transform> rowResourses;
     int index = 0;
     [SerializeField]
     GameObject toInstantiate;
@@ -41,12 +41,15 @@ public class ResouresePosition : MonoBehaviour
 
         if (rowResourses.Count > 0 )
         {
-            
-            transform.position = Vector3.MoveTowards(transform.position, rowResourses[index].transform.position , speed * Time.deltaTime);
-            if (!isMinning)
-            {
-                animator.SetBool("forword", true);
+            if (rowResourses[index].transform.gameObject.active) {
+                speed = 2f;
+                transform.position = Vector3.MoveTowards(transform.position, rowResourses[index].transform.position, speed * Time.deltaTime);
+                if (!isMinning)
+                {
+                    animator.SetBool("forword", true);
+                }
             }
+            
 
         }
 
@@ -58,12 +61,7 @@ public class ResouresePosition : MonoBehaviour
         {
             t.gameObject.SetActive(true);
         }
-        
-        //gameObject.SetActive(false);
-       // gameObject.SetActive(true);
-        
-        //Destroy(gameObject);
-        //Instantiate(gameObject);
+        index = 0;
         
     }
 
@@ -99,6 +97,7 @@ public class ResouresePosition : MonoBehaviour
                     speed = 0f;
                     animator.SetBool("Minning", false);
                     animator.SetBool("forword", false);
+                    index = 0;
                 }
                 else
                 {

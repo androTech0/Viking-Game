@@ -10,25 +10,31 @@ public class GaurdMovent : MonoBehaviour
     Animator animator;
     bool isHealing = false;
     int targetPosi = 0;
+    float referech = 2f;
+    
 
     private void Start()
     {
         animator = GetComponent<Animator>();
     }
 
+    [System.Obsolete]
     void Update()
     {
         targetPosi = EnemeisArr.Count - 1;
         attack();
+        
         if (health <= 0)
         {
+            referech -= Time.deltaTime;
+        }
+        if (referech <= 0.0) {
             GameObject.Find("EventSystem").GetComponent<UiManager>().GaurdsArr.RemoveAt(0);
-
             Destroy(gameObject);
         }
     }
 
-
+    [System.Obsolete]
     private void attack()
     {
         
@@ -37,22 +43,22 @@ public class GaurdMovent : MonoBehaviour
 
         if (gauedSpeed > 0 && EnemeisArr.Count > 0)
         {
-            
+            gauedSpeed = 2f;
             if (EnemeisArr.Count == GaurdsArr.Count)
             {
                 targetPosi = EnemeisArr.Count - 1;
-                
+
             }
             else if (EnemeisArr.Count <= GaurdsArr.Count)
             {
                 bool isFound = false;
-                for (int x = GaurdsArr.Count-1; x >= 0; x--)
+                for (int x = GaurdsArr.Count - 1; x >= 0; x--)
                 {
                     if (x == EnemeisArr.Count) {
                         for (int y = 1; y <= x; y++) {
-                            int diff = GaurdsArr.Count-y;
+                            int diff = GaurdsArr.Count - y;
                             if (diff == EnemeisArr.Count) {
-                                targetPosi = EnemeisArr.Count - y - 1;
+                                targetPosi = EnemeisArr.Count - y;
                                 isFound = true;
                                 break;
                             }
@@ -65,7 +71,9 @@ public class GaurdMovent : MonoBehaviour
 
                 }
             }
-            
+            else if (EnemeisArr.Count >= GaurdsArr.Count) {
+                targetPosi = GaurdsArr.Count - 1;
+            }
 
             isHealing = false;
             animator.SetBool("swardAttack", false);
@@ -82,14 +90,14 @@ public class GaurdMovent : MonoBehaviour
         }
         else if (EnemeisArr.Count == 0)
         {
-            if (health < 100 && !isHealing)
+            if (health < 100 && !isHealing && GameObject.Find("EventSystem").GetComponent<UiManager>().Items[11].active)
             {
                 gauedSpeed = 2;
                 animator.SetBool("swardAttack", false);
                 animator.SetBool("shieldAttack", false);
                 animator.SetBool("Walk", true);
 
-                GameObject gmobj = GameObject.Find("EventSystem").GetComponent<UiManager>().Items[9];
+                GameObject gmobj = GameObject.Find("EventSystem").GetComponent<UiManager>().Items[11];
                 transform.position = Vector3.MoveTowards(transform.position, gmobj.gameObject.transform.position, gauedSpeed * Time.deltaTime);
 
 
@@ -125,14 +133,7 @@ public class GaurdMovent : MonoBehaviour
                 animator.SetBool("shieldAttack", true);
             }
 
-        }/*
-        else
-        {
-            gauedSpeed = 2;
-            //animator.SetBool("Walk", false);
-            animator.SetBool("swardAttack", false);
-            animator.SetBool("shieldAttack", false);
-        }*/
+        }
     }
 
 
@@ -152,24 +153,18 @@ public class GaurdMovent : MonoBehaviour
             }
 
             health -= damage * Time.deltaTime ;
-
-            if (health < 20)
-            {
-                animator.SetBool("Die", true);
-            }
-
             if (health <= 0)
             {
-                GameObject.Find("EventSystem").GetComponent<UiManager>().GaurdsArr.RemoveAt(0);
+                animator.SetBool("Die", true);
 
-                EnemeisArr.ForEach(current =>
+                for (int x = 0; x < GameObject.Find("EventSystem").GetComponent<UiManager>().EnemeisArr.Count; x++)
                 {
-                    current.gameObject.GetComponent<EnemyMovment>().enamySpeed = 2f;
-
-                });
-                Destroy(gameObject);
-
+                    GameObject.Find("EventSystem").GetComponent<UiManager>().EnemeisArr[x].GetComponent<EnemyMovment>().enamySpeed = 2f;
+                    
+                }
+                
             }
+
         }
     }
 

@@ -54,40 +54,6 @@ public class UiManager : MonoBehaviour
     }
 
 
-
-    public void showMinersMenu()
-    {
-        if (Items[5].active)
-        {
-            Items[5].SetActive(false);
-        }
-        else
-        {
-            Items[5].SetActive(true);
-        }
-    }
-    public void hideMinersMenu()
-    {
-        Items[5].SetActive(false);
-    }
-
-    public void showEnemiesMenu()
-    {
-        if (Items[6].active)
-        {
-            Items[6].SetActive(false);
-        }
-        else
-        {
-            Items[6].SetActive(true);
-        }
-    }
-    public void hideEnemiesMenu()
-    {
-        Items[6].SetActive(false);
-    }
-
-
     public void instantiateEnemy()
     {
         GameObject gamobj =  Instantiate(Items[7],new Vector3(Items[7].transform.position.x + increase1, Items[7].transform.position.y, Items[7].transform.position.z),Items[7].transform.rotation);
@@ -113,7 +79,6 @@ public class UiManager : MonoBehaviour
         if (Items[9].active)
         {
             Items[0].SetActive(true);
-            hideMinersMenu();
         }
         else
         {
@@ -127,7 +92,6 @@ public class UiManager : MonoBehaviour
         if (Items[9].active)
         {
             Items[1].SetActive(true);
-        hideMinersMenu();
         }
         else
         {
@@ -139,7 +103,6 @@ public class UiManager : MonoBehaviour
         if (Items[9].active)
         {
             Items[2].SetActive(true);
-            hideMinersMenu();
         }
         else
         {
@@ -152,7 +115,6 @@ public class UiManager : MonoBehaviour
         if (Items[9].active)
         {
             Items[3].SetActive(true);
-        hideMinersMenu();
         }
         else
         {
@@ -165,7 +127,6 @@ public class UiManager : MonoBehaviour
         if (Items[9].active)
         {
             Items[4].SetActive(true);
-        hideMinersMenu();
         }
         else
         {
