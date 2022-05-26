@@ -93,7 +93,7 @@ public class UiManager : MonoBehaviour
         }
         else
         {
-            Debug.Log("No storage");
+            SSTools.ShowMessage("you must build a Repository First",SSTools.Position.top,SSTools.Time.threeSecond);
         }
         
 
@@ -106,7 +106,7 @@ public class UiManager : MonoBehaviour
         }
         else
         {
-            Debug.Log("No storage");
+            SSTools.ShowMessage("you must build a Repository First", SSTools.Position.top, SSTools.Time.threeSecond);
         }
     }
     public void instantiateIron()
@@ -117,7 +117,7 @@ public class UiManager : MonoBehaviour
         }
         else
         {
-            Debug.Log("No storage");
+            SSTools.ShowMessage("you must build a Repository First", SSTools.Position.top, SSTools.Time.threeSecond);
         }
         
     }
@@ -129,7 +129,7 @@ public class UiManager : MonoBehaviour
         }
         else
         {
-            Debug.Log("No storage");
+            SSTools.ShowMessage("you must build a Repository First", SSTools.Position.top, SSTools.Time.threeSecond);
         }
     }
 
@@ -141,7 +141,7 @@ public class UiManager : MonoBehaviour
         }
         else
         {
-            Debug.Log("No storage");
+            SSTools.ShowMessage("you must build a Repository First", SSTools.Position.top, SSTools.Time.threeSecond);
         }
     }
 
@@ -164,13 +164,13 @@ public class UiManager : MonoBehaviour
             }
             else
             {
-                Debug.Log("Not avilable");
+                SSTools.ShowMessage("number of maximum hospitals is Two", SSTools.Position.top, SSTools.Time.threeSecond);
             }
             
         }
         else
         {
-            Debug.Log("No Trees");
+            SSTools.ShowMessage("you don't have wood", SSTools.Position.top, SSTools.Time.threeSecond);
         }
     }
 
@@ -192,12 +192,12 @@ public class UiManager : MonoBehaviour
             }
             else
             {
-                Debug.Log("Not avilable");
+                SSTools.ShowMessage("number of maximum Stores is Two", SSTools.Position.top, SSTools.Time.threeSecond);
             }
         }
         else
         {
-            Debug.Log("No Trees");
+            SSTools.ShowMessage("you don't have wood", SSTools.Position.top, SSTools.Time.threeSecond);
         }
     }
 
