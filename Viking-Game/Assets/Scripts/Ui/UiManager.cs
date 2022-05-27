@@ -201,6 +201,11 @@ public class UiManager : MonoBehaviour
         }
     }
 
+    public void ExitGame()
+    {
+        Application.Quit();
+    }
+
 
     void setValues()
     {
