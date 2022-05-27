@@ -10,8 +10,6 @@ public class CameraControls : MonoBehaviour
 
     private float x;
     private float y;
-    float Speed = 3;
-
     void Start()
     {
         controller = GetComponent<CharacterController>();
@@ -25,19 +23,29 @@ public class CameraControls : MonoBehaviour
     void Update()
     {
 
-        moveDirection = new Vector3(Input.GetAxis("Horizontal"), 0f, Input.GetAxis("Vertical"));
-        moveDirection *= speed;
-
-
-        Vector3 translate = moveDirection.normalized * 5;
+        Vector3 translate = moveDirection.normalized * speed;
 
         controller.Move(transform.rotation * translate * Time.deltaTime);
         if (!Input.GetKey(KeyCode.LeftAlt))
         {
-            x += Input.GetAxis("Mouse X") * Speed;
-            y -= Input.GetAxis("Mouse Y") * Speed;
+            x += Input.GetAxis("Mouse X") * 3;
+            y -= Input.GetAxis("Mouse Y") * 3;
+        }
+
+        if (Input.GetKey(KeyCode.LeftControl))
+        {
+            speed = 14f;
+            Debug.Log(speed);
         }
         
+        if (Input.GetKeyUp(KeyCode.LeftControl))
+        {
+            speed = 6f;
+            Debug.Log(speed);
+        }
+
+        moveDirection = new Vector3(Input.GetAxis("Horizontal"), 0f, Input.GetAxis("Vertical"));
+        moveDirection *= 6f;
 
         transform.rotation = Quaternion.Euler(y, x, 0);
     }
