@@ -19,7 +19,7 @@ public class ResouresePosition : MonoBehaviour
     public List<Transform> itemsToCollect = new List<Transform>();
 
 
-    public float speed = 3f;
+    float speed = 3f;
     int stopTime = 200;
     bool isMinning = false;
 
@@ -42,7 +42,7 @@ public class ResouresePosition : MonoBehaviour
         if (rowResourses.Count > 0 )
         {
             if (rowResourses[index].transform.gameObject.active) {
-                speed = 2f;
+                speed = 3f;
                 transform.position = Vector3.MoveTowards(transform.position, rowResourses[index].transform.position, speed * Time.deltaTime);
                 if (!isMinning)
                 {
@@ -50,7 +50,6 @@ public class ResouresePosition : MonoBehaviour
                 }
             }
             
-
         }
 
     }

@@ -32,6 +32,11 @@ public class UiManager : MonoBehaviour
     10 - repositry2
     11 - revive1
     12 - revive2
+    13 - collector 1
+    14 - collector 2
+    15 - collector 3
+    16 - collector 4
+    17 - collector trees
 
 
     */
@@ -53,38 +58,62 @@ public class UiManager : MonoBehaviour
         setValues();
     }
 
-
+    #region active fighters
     public void instantiateEnemy()
     {
-        GameObject gamobj =  Instantiate(Items[7],new Vector3(Items[7].transform.position.x + increase1, Items[7].transform.position.y, Items[7].transform.position.z),Items[7].transform.rotation);
+        if (Items[11].active)
+        {
+
+GameObject gamobj =  Instantiate(Items[7],new Vector3(Items[7].transform.position.x + increase1, Items[7].transform.position.y, Items[7].transform.position.z),Items[7].transform.rotation);
         gamobj.transform.parent = GameObject.Find("Enemies").transform;
         EnemeisArr.Add(gamobj);
         //hideEnemiesMenu();
         increase1 += 1.3f;
+
+        }
+        else
+        {
+            SSTools.ShowMessage("you must build a Hospital before fighting", SSTools.Position.top, SSTools.Time.threeSecond);
+
+        }
+        
     }
     public void instantiateGuard()
     {
-
-        GameObject gamobj = Instantiate(Items[8], new Vector3(Items[8].transform.position.x + increase2, Items[8].transform.position.y, Items[8].transform.position.z), Items[8].transform.rotation);
+        if (Items[11].active)
+        {
+            GameObject gamobj = Instantiate(Items[8], new Vector3(Items[8].transform.position.x + increase2, Items[8].transform.position.y, Items[8].transform.position.z), Items[8].transform.rotation);
         gamobj.transform.parent = GameObject.Find("Enemies").transform;
         GaurdsArr.Add(gamobj);
         //hideEnemiesMenu();
         increase2 += 1.3f;
+        }
+        else
+        {
+            SSTools.ShowMessage("you must build a Hospital before fighting", SSTools.Position.top, SSTools.Time.threeSecond);
 
+        }
     }
-
     public void instantiateGuard2()
     {
-
-        GameObject gamobj = Instantiate(Items[6], new Vector3(Items[6].transform.position.x + increase2, Items[6].transform.position.y, Items[6].transform.position.z), Items[6].transform.rotation);
+        if (Items[11].active)
+        {
+            GameObject gamobj = Instantiate(Items[6], new Vector3(Items[6].transform.position.x + increase2, Items[6].transform.position.y, Items[6].transform.position.z), Items[6].transform.rotation);
         gamobj.transform.parent = GameObject.Find("Enemies").transform;
         GaurdsArr.Add(gamobj);
         //hideEnemiesMenu();
         increase2 += 1.3f;
-
     }
+        else
+        {
+            SSTools.ShowMessage("you must build a Hospital before fighting", SSTools.Position.top, SSTools.Time.threeSecond);
+
+        }
+    }
+    #endregion
 
 
+    #region active Miners
     public void instantiateCrystalRed()
     {
         if (Items[9].active)
@@ -144,8 +173,10 @@ public class UiManager : MonoBehaviour
             SSTools.ShowMessage("you must build a Repository First", SSTools.Position.top, SSTools.Time.threeSecond);
         }
     }
+    #endregion
 
 
+    #region active Building
     public void instantiateHospital()
     {
         if (PlayerPrefs.GetInt("Trees") >= 200)
@@ -181,6 +212,7 @@ public class UiManager : MonoBehaviour
             if (!Items[9].active)
             {
                 Items[9].SetActive(true);
+                activeCollectors();
                 PlayerPrefs.SetInt("Trees", PlayerPrefs.GetInt("Trees") - 100);
                 //hideMinersMenu();
             }
@@ -200,6 +232,16 @@ public class UiManager : MonoBehaviour
             SSTools.ShowMessage("you don't have wood", SSTools.Position.top, SSTools.Time.threeSecond);
         }
     }
+    #endregion
+
+    void activeCollectors()
+    {
+        Items[13].SetActive(true);
+        Items[14].SetActive(true);
+        Items[15].SetActive(true);
+        Items[16].SetActive(true);
+        Items[17].SetActive(true);
+    }
 
     public void ExitGame()
     {
@@ -217,4 +259,7 @@ public class UiManager : MonoBehaviour
     }
 
 
+
 }
+
+

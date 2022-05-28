@@ -6,12 +6,18 @@ public class Collect_Items : MonoBehaviour
 {
     [SerializeField]
     Transform Path;
+
     [SerializeField]
     GameObject Miner;
+
     [SerializeField]
     GameObject Repository;
+
     [SerializeField]
     string nameOfResourses;
+
+    [SerializeField]
+    int revenue;
     public List<Transform> itemsToCollect;
 
     Animator animator;
@@ -66,7 +72,7 @@ public class Collect_Items : MonoBehaviour
             
 
             print("Repository");
-            PlayerPrefs.SetInt(nameOfResourses, PlayerPrefs.GetInt(nameOfResourses, 0) + 10);
+            PlayerPrefs.SetInt(nameOfResourses, PlayerPrefs.GetInt(nameOfResourses, 0) + revenue);
             Destroy(itemsToCollect[index].gameObject);
             index += 1;
             if (index == itemsToCollect.Count)
