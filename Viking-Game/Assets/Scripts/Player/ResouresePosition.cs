@@ -18,7 +18,6 @@ public class ResouresePosition : MonoBehaviour
 
     public List<Transform> itemsToCollect = new List<Transform>();
 
-
     float speed = 3f;
     int stopTime = 200;
     bool isMinning = false;

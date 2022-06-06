@@ -143,7 +143,6 @@ public class GaurdMovent : MonoBehaviour
                 animator.SetBool("swardAttack", false);
                 animator.SetBool("shieldAttack", true);
             }
-
         }
     }
 
