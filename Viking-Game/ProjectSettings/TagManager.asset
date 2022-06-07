@@ -17,6 +17,7 @@ TagManager:
   - gaurdShield
   - enemyShield
   - guardHammer
+  - WeapansMaker
   layers:
   - Default
   - TransparentFX
