@@ -60,55 +60,56 @@ public class UiManager : MonoBehaviour
 
     #region active fighters
     public void instantiateEnemy()
-    {
+    {/*
         if (Items[11].active)
         {
-
+            */
 GameObject gamobj =  Instantiate(Items[7],new Vector3(Items[7].transform.position.x + increase1, Items[7].transform.position.y, Items[7].transform.position.z),Items[7].transform.rotation);
         gamobj.transform.parent = GameObject.Find("Enemies").transform;
         EnemeisArr.Add(gamobj);
         //hideEnemiesMenu();
         increase1 += 1.3f;
-
+            /*
         }
         else
         {
             SSTools.ShowMessage("you must build a Hospital before fighting", SSTools.Position.top, SSTools.Time.threeSecond);
 
-        }
+        }*/
         
     }
     public void instantiateGuard()
     {
-        if (Items[11].active)
-        {
+        //if (Items[11].active)
+        //{
             GameObject gamobj = Instantiate(Items[8], new Vector3(Items[8].transform.position.x + increase2, Items[8].transform.position.y, Items[8].transform.position.z), Items[8].transform.rotation);
         gamobj.transform.parent = GameObject.Find("Enemies").transform;
         GaurdsArr.Add(gamobj);
         //hideEnemiesMenu();
         increase2 += 1.3f;
+        /*
         }
         else
         {
             SSTools.ShowMessage("you must build a Hospital before fighting", SSTools.Position.top, SSTools.Time.threeSecond);
 
-        }
+        }*/
     }
     public void instantiateGuard2()
-    {
+    {/*
         if (Items[11].active)
-        {
+        {*/
             GameObject gamobj = Instantiate(Items[6], new Vector3(Items[6].transform.position.x + increase2, Items[6].transform.position.y, Items[6].transform.position.z), Items[6].transform.rotation);
         gamobj.transform.parent = GameObject.Find("Enemies").transform;
         GaurdsArr.Add(gamobj);
         //hideEnemiesMenu();
         increase2 += 1.3f;
-    }
+   /* }
         else
         {
             SSTools.ShowMessage("you must build a Hospital before fighting", SSTools.Position.top, SSTools.Time.threeSecond);
 
-        }
+        }*/
     }
     #endregion
 
