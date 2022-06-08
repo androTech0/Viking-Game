@@ -35,13 +35,11 @@ public class CameraControls : MonoBehaviour
         if (Input.GetKey(KeyCode.LeftControl))
         {
             speed = 14f;
-            Debug.Log(speed);
         }
         
         if (Input.GetKeyUp(KeyCode.LeftControl))
         {
             speed = 6f;
-            Debug.Log(speed);
         }
 
         moveDirection = new Vector3(Input.GetAxis("Horizontal"), 0f, Input.GetAxis("Vertical"));

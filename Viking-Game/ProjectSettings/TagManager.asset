@@ -18,6 +18,7 @@ TagManager:
   - enemyShield
   - guardHammer
   - WeapansMaker
+  - citizenStation
   layers:
   - Default
   - TransparentFX

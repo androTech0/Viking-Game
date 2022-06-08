@@ -11,7 +11,9 @@ public class UiManager : MonoBehaviour
 
     float increase1, increase2 = 1;
 
-    public List<GameObject> EnemeisArr, GaurdsArr = new List<GameObject>();
+    public GameObject pathss;
+
+    public List<GameObject> EnemeisArr, GaurdsArr,citizensArr = new List<GameObject>();
 
     //public List<Transform> RedResourses, BlueResourses, IronResourses, GoldResourses,toRespwn = new List<Transform>();
 
@@ -42,6 +44,9 @@ public class UiManager : MonoBehaviour
     16 - collector 4
     17 - collector trees
     18 - WeapansMaker1
+    19 - shiltter 1
+    20 - shiltter 2
+    21 - citizen
 
 
     */
@@ -51,11 +56,11 @@ public class UiManager : MonoBehaviour
 
     private void Start()
     {
-        PlayerPrefs.SetInt("RedCrystals", 0);
+        PlayerPrefs.SetInt("RedCrystals", 1000);
         PlayerPrefs.SetInt("BlueCrystals", 0);
         PlayerPrefs.SetInt("Iron", 25);
         PlayerPrefs.SetInt("Gold", 0);
-        PlayerPrefs.SetInt("Trees", 100);
+        PlayerPrefs.SetInt("Trees", 1000);
         PlayerPrefs.SetInt("Swords",0);
         PlayerPrefs.SetInt("Shields",0);
         PlayerPrefs.SetInt("Hammers",0);
@@ -69,54 +74,15 @@ public class UiManager : MonoBehaviour
         makeWeapons();
     }
 
-    void makeWeapons() {
-        if (Items[18].active)
-        {
-            Debug.Log("swordCounter = " + swordCounter);
-            Debug.Log("hammerCounter = " + hammerCounter);
-            Debug.Log("sheildCounter = " + sheildCounter);
-            if (swordCounter > 0.0f && PlayerPrefs.GetInt("Iron") >= 5)
-            {
-                swordCounter -= 1;
-            }
-            else if (swordCounter == 0.0f)
-            {
-                PlayerPrefs.SetInt("Iron", PlayerPrefs.GetInt("Iron") - 5);
-                PlayerPrefs.SetInt("Swords", PlayerPrefs.GetInt("Swords") + 1);
-                swordCounter = 2f;
-            }
 
-            if (hammerCounter > 0.0f && PlayerPrefs.GetInt("Iron", 0) >= 5)
-            {
-                hammerCounter -= 1;
-            }
-            else if (hammerCounter == 0.0f)
-            {
-                PlayerPrefs.SetInt("Iron", PlayerPrefs.GetInt("Iron") - 5);
-                PlayerPrefs.SetInt("Hammers", PlayerPrefs.GetInt("Hammers") + 1);
-                hammerCounter = 2f;
-            }
 
-            if (sheildCounter > 0.0f && PlayerPrefs.GetInt("Iron", 0) >= 5)
-            {
-                sheildCounter -= 1;
-            }
-            else if (sheildCounter == 0.0f)
-            {
-                PlayerPrefs.SetInt("Iron", PlayerPrefs.GetInt("Iron") - 5);
-                PlayerPrefs.SetInt("Shields", PlayerPrefs.GetInt("Shields") + 1);
-                sheildCounter = 2f;
-            }
-        }
-    }
-
-    #region active fighters
+    #region instantiate fighters
     public void instantiateEnemy()
     {/*
         if (Items[11].active)
         {
             */
-GameObject gamobj =  Instantiate(Items[7],new Vector3(Items[7].transform.position.x + increase1, Items[7].transform.position.y, Items[7].transform.position.z),Items[7].transform.rotation);
+        GameObject gamobj =  Instantiate(Items[7],new Vector3(Items[7].transform.position.x + increase1, Items[7].transform.position.y, Items[7].transform.position.z),Items[7].transform.rotation);
         gamobj.transform.parent = GameObject.Find("Enemies").transform;
         EnemeisArr.Add(gamobj);
         //hideEnemiesMenu();
@@ -130,26 +96,37 @@ GameObject gamobj =  Instantiate(Items[7],new Vector3(Items[7].transform.positio
         }*/
         
     }
-    public void instantiateGuard()
+
+    public void citizenBB()
     {
-
-        if (PlayerPrefs.GetInt("Swords") > 0 && PlayerPrefs.GetInt("Shields") > 0) {
-            GameObject gamobj = Instantiate(Items[8], new Vector3(Items[8].transform.position.x + increase2, Items[8].transform.position.y, Items[8].transform.position.z), Items[8].transform.rotation);
-            gamobj.transform.parent = GameObject.Find("Enemies").transform;
-            GaurdsArr.Add(gamobj);
-            //hideEnemiesMenu();
-            increase2 += 1.3f;
-            PlayerPrefs.SetInt("Swords", PlayerPrefs.GetInt("Swords")-1);
-            PlayerPrefs.SetInt("Shields", PlayerPrefs.GetInt("Shields")-1);
-
-        }
-        
-        else
+        if (citizensArr.Count > 0)
         {
-            SSTools.ShowMessage("Need Weapans !!", SSTools.Position.top, SSTools.Time.threeSecond);
 
+            if (PlayerPrefs.GetInt("Swords") > 0 && PlayerPrefs.GetInt("Shields") > 0)
+            {
+                citizensArr[0].GetComponent<moveCitizen>().isBusy = true;
+                citizensArr.RemoveAt(0);
+            }
+
+            else
+            {
+                SSTools.ShowMessage("Need Weapans !!", SSTools.Position.top, SSTools.Time.threeSecond);
+
+            }
         }
     }
+
+    public void instantiateGuard()
+    {
+                GameObject gamobj = Instantiate(Items[8], new Vector3(Items[8].transform.position.x + increase2, Items[8].transform.position.y, Items[8].transform.position.z), Items[8].transform.rotation);
+                gamobj.transform.parent = GameObject.Find("Enemies").transform;
+                GaurdsArr.Add(gamobj);
+                //hideEnemiesMenu();
+                increase2 += 1.3f;
+                PlayerPrefs.SetInt("Swords", PlayerPrefs.GetInt("Swords") - 1);
+                PlayerPrefs.SetInt("Shields", PlayerPrefs.GetInt("Shields") - 1);
+    }
+
     public void instantiateGuard2()
     {
         
@@ -292,7 +269,7 @@ GameObject gamobj =  Instantiate(Items[7],new Vector3(Items[7].transform.positio
             else if (Items[9].active && !Items[10].active)
             {
                 Items[10].SetActive(true);
-                PlayerPrefs.SetInt("Trees" ,PlayerPrefs.GetInt("Trees") - 100);
+                PlayerPrefs.SetInt("Trees", PlayerPrefs.GetInt("Trees") - 100);
                 // hideMinersMenu();
             }
             else
@@ -305,8 +282,97 @@ GameObject gamobj =  Instantiate(Items[7],new Vector3(Items[7].transform.positio
             SSTools.ShowMessage("you don't have wood", SSTools.Position.top, SSTools.Time.threeSecond);
         }
     }
+    public void instantiateShiltter()
+    {
+        if (PlayerPrefs.GetInt("Trees") >= 100)
+        {
+            if (!Items[19].active)
+            {
+                Items[19].SetActive(true);
+                PlayerPrefs.SetInt("Trees", PlayerPrefs.GetInt("Trees") - 100);
+                //hideMinersMenu();
+            }
+            else if (Items[19].active && !Items[20].active)
+            {
+                Items[20].SetActive(true);
+                PlayerPrefs.SetInt("Trees", PlayerPrefs.GetInt("Trees") - 100);
+                // hideMinersMenu();
+            }
+            else
+            {
+                SSTools.ShowMessage("number of maximum Stores is Two", SSTools.Position.top, SSTools.Time.threeSecond);
+            }
+        }
+        else
+        {
+            SSTools.ShowMessage("you don't have wood", SSTools.Position.top, SSTools.Time.threeSecond);
+        }
+    }
+
     #endregion
 
+    void makeWeapons() {
+        if (Items[18].active)
+        {
+            if (swordCounter > 0.0f && PlayerPrefs.GetInt("Iron") >= 5)
+            {
+                swordCounter -= 1;
+            }
+            else if (swordCounter == 0.0f)
+            {
+                PlayerPrefs.SetInt("Iron", PlayerPrefs.GetInt("Iron") - 5);
+                PlayerPrefs.SetInt("Swords", PlayerPrefs.GetInt("Swords") + 1);
+                swordCounter = 2f;
+            }
+
+            if (hammerCounter > 0.0f && PlayerPrefs.GetInt("Iron", 0) >= 5)
+            {
+                hammerCounter -= 1;
+            }
+            else if (hammerCounter == 0.0f)
+            {
+                PlayerPrefs.SetInt("Iron", PlayerPrefs.GetInt("Iron") - 5);
+                PlayerPrefs.SetInt("Hammers", PlayerPrefs.GetInt("Hammers") + 1);
+                hammerCounter = 2f;
+            }
+
+            if (sheildCounter > 0.0f && PlayerPrefs.GetInt("Iron", 0) >= 5)
+            {
+                sheildCounter -= 1;
+            }
+            else if (sheildCounter == 0.0f)
+            {
+                PlayerPrefs.SetInt("Iron", PlayerPrefs.GetInt("Iron") - 5);
+                PlayerPrefs.SetInt("Shields", PlayerPrefs.GetInt("Shields") + 1);
+                sheildCounter = 2f;
+            }
+        }
+    }
+
+
+    public void instantiateCitizens()
+    {
+        if (Items[19].active)
+        {
+            if (PlayerPrefs.GetInt("RedCrystals") >= 5)
+            {
+
+            GameObject citizen = Instantiate(Items[21]);
+            citizen.transform.parent = GameObject.Find("Citizens").transform;
+            citizensArr.Add(citizen);
+                PlayerPrefs.SetInt("RedCrystals", PlayerPrefs.GetInt("RedCrystals") - 5);
+            }
+            else
+            {
+                SSTools.ShowMessage("need crystals", SSTools.Position.top, SSTools.Time.threeSecond);
+
+            }
+        }
+        else
+        {
+            SSTools.ShowMessage("create shiltter", SSTools.Position.top, SSTools.Time.threeSecond);
+        }
+    }
     void activeCollectors()
     {
         Items[13].SetActive(true);
